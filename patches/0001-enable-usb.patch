@@ -1,1 +1,12 @@
+--- a/target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
++++ b/target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
+@@
+ &ehci {
+-       status = "disabled";
++       status = "okay";
+ };
 
+ &ohci {
+-       status = "disabled";
++       status = "okay";
+ };
