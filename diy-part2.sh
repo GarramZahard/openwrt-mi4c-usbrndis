@@ -9,3 +9,7 @@
 
 # Ubah hostname (opsional)
 sed -i 's/OpenWrt/OpenWrt-4C/g' package/base-files/files/bin/config_generate
+
+# Nonaktifkan initramfs agar hanya squashfs yang dibangun
+sed -i '/CONFIG_TARGET_ROOTFS_INITRAMFS/d' .config
+echo 'CONFIG_TARGET_ROOTFS_INITRAMFS=n' >> .config
