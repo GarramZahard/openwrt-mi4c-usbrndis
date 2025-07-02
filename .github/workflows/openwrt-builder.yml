@@ -35,6 +35,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
+      with:
+        fetch-depth: 0  # penting agar seluruh commit dan file (termasuk /patches) ikut diclone
 
     - name: Initialization environment
       env:
