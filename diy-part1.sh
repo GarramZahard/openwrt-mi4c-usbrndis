@@ -28,21 +28,4 @@
 # echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 
 # Patch DTS agar USB aktif untuk Xiaomi Mi Router 4C
-cat << "EOF" > usb-rndis-mir4c.patch
---- a/target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
-+++ b/target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts
-@@ -52,7 +52,7 @@
- &ehci {
--	status = "disabled";
-+	status = "okay";
- };
- 
- &ohci {
--	status = "disabled";
-+	status = "okay";
- };
-EOF
-
-# Terapkan patch
-cd openwrt
-patch -p1 < ../usb-rndis-mir4c.patch
+patch -p1 < "$GITHUB_WORKSPACE/patches/0001-enable-usb.patch"
