@@ -1,29 +1,12 @@
 #!/bin/bash
 #
 # diy-part2.sh – dijalankan dari dalam folder 'openwrt'
+DTS_FILE="target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4c.dts"
 
-echo "📂 Working directory: $(pwd)"
-echo "📂 GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-echo "📄 Listing patches folder:"
-ls -l "$GITHUB_WORKSPACE/patches"
-
-#######################################################################
-# 1) PATCH DTS: aktifkan USB EHCI/OHCI untuk Xiaomi Mi Router 4C
-#######################################################################
-patch -p1 < "$GITHUB_WORKSPACE/patches/0001-enable-usb.patch" || {
-  echo "❌  Patch USB gagal diterapkan"
+if [ -f "$DTS_FILE" ]; then
+  sed -i 's/status = "disabled"/status = "okay"/g' "$DTS_FILE"
+  echo "✅ USB EHCI/OHCI diaktifkan di $DTS_FILE"
+else
+  echo "❌ File DTS tidak ditemukan: $DTS_FILE"
   exit 1
-}
-
-#######################################################################
-# 2) Ubah hostname (opsional)
-#######################################################################
-sed -i 's/OpenWrt/OpenWrt-4C/g' package/base-files/files/bin/config_generate
-
-#######################################################################
-# 3) Nonaktifkan pembuatan initramfs – hanya squashfs
-#######################################################################
-for opt in CONFIG_TARGET_ROOTFS_INITRAMFS CONFIG_TARGET_IMAGES_INITRAMFS; do
-  sed -i "/${opt}/d" .config
-  echo "${opt}=n" >> .config
-done
+fi
