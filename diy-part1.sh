@@ -10,4 +10,4 @@
 # echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 
 # Patch DTS agar USB aktif untuk Xiaomi Mi Router 4C
-patch -p1 < "$GITHUB_WORKSPACE/patches/0001-enable-usb.patch"
+patch -p1 < ../patches/0001-enable-usb.patch
