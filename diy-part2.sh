@@ -8,9 +8,10 @@
 #######################################################################
 # Folder kerja saat ini sudah "openwrt" (lihat workflow.yml).
 # File patch berada satu level di atas, di folder "patches".
-patch -p1 < ../patches/0001-enable-usb.patch || {
-  echo "❌  Patch USB gagal diterapkan"; exit 1; }
-
+patch -p1 < "$GITHUB_WORKSPACE/patches/0001-enable-usb.patch" || {
+  echo "❌  Patch USB gagal diterapkan"
+  exit 1
+}
 #######################################################################
 # 2) Ubah hostname (opsional)
 #######################################################################
